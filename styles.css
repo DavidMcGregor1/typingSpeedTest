@@ -5,22 +5,23 @@ body {
     background-color: #141519;
   }
 
-  * {
+  /* * {
     border: red dashed 1px;
-  }
+  } */
 
   #game-container {
     background-color: #1F2630;
     text-align: center;
-    height: 500px;
+    height: 550px;
     width: 50%;
-    margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 30px;
   }
 
   header {
     text-align: center;
+    margin-bottom: 5%;
   }
 
   #mainHeader {
@@ -28,14 +29,13 @@ body {
   }
 
   #input-box {
-    margin-top: 0%;
+    margin-top: 5%;
     height: 5%;
-    width: 40%;
+    width: 45%;
   }
 
   #sentence {
-    margin-top: 20%;
-    margin-bottom: 5%;
+    margin-top: 20%; 
     font-size: large;
     font-weight: 550;
     color: white;
@@ -46,5 +46,16 @@ body {
   }
 
   #start-button {
-    
+    width: 150px;
+    height: 50px;
+    border-radius: 40px;
+    border: none;
+    background-color: #FC7613;
+    color: white;
+  }
+
+  #result {
+    color: white;
+    margin-top: 5%;
+    font-size: large;
   }
