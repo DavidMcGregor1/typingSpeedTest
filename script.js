@@ -118,3 +118,20 @@ const startButton = document.getElementById("start-button");
 const sentenceContainer = document.getElementById("sentence-container");
 const userInput = document.getElementById("user-input");
 const result = document.getElementById("result");
+
+startButton.addEventListener("click", startGame);
+
+function startGame() {
+  currentIndex = 0;
+  userInput.value = "";
+  result.textContent = "";
+
+  shuffleWords();
+  displaySentence();
+
+  userInput.removeAttribute("disabled");
+  userInput.focus();
+  userInput.addEventListener("input", checkInput);
+
+  startTime = new Date();
+}
