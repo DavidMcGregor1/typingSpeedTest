@@ -111,4 +111,10 @@ const words = [
   "ought",
 ];
 
-console.log(words);
+let currentIndex = 0;
+let startTime, endTime;
+
+const startButton = document.getElementById("start-button");
+const sentenceContainer = document.getElementById("sentence-container");
+const userInput = document.getElementById("user-input");
+const result = document.getElementById("result");
