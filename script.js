@@ -171,3 +171,13 @@ function checkInput() {
     userInput.classList.add("incorrect");
   }
 }
+
+function endGame() {
+  endTime = new Date();
+  userInput.setAttribute("disabled", true);
+
+  const elapsedTime = (endTime - startTime) / 1000; // in seconds
+  const wordsPerMinute = Math.round((words.length / elapsedTime) * 60);
+
+  result.textContent = `Average Words Per Minute: ${wordsPerMinute}`;
+}
