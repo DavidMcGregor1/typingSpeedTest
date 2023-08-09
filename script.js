@@ -135,3 +135,39 @@ function startGame() {
 
   startTime = new Date();
 }
+
+function shuffleWords() {
+  for (let i = words.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [words[i], words[j]] = [words[j], words[i]];
+  }
+}
+
+function displaySentence() {
+  const randomWordCount = Math.floor(Math.random() * 10) + 5; // Random word count between 5 and 14
+  const randomSentence = words
+    .slice(currentIndex, currentIndex + randomWordCount)
+    .join(" ");
+  sentenceContainer.textContent = randomSentence;
+}
+
+function checkInput() {
+  const typedText = userInput.value;
+  const currentSentence = sentenceContainer.textContent;
+
+  if (typedText === currentSentence) {
+    userInput.classList.remove("incorrect");
+    userInput.classList.add("correct");
+    currentIndex += currentSentence.split(" ").length;
+
+    if (currentIndex < words.length) {
+      userInput.value = ""; // Clear the text box
+      displaySentence();
+    } else {
+      endGame();
+    }
+  } else {
+    userInput.classList.remove("correct");
+    userInput.classList.add("incorrect");
+  }
+}
