@@ -110,74 +110,48 @@ const words = [
   "shall",
   "ought",
 ];
-
-let currentIndex = 0;
-let startTime, endTime;
+const sentenceLength = 10;
 
 const startButton = document.getElementById("start-button");
-const sentenceContainer = document.getElementById("sentence-container");
-const userInput = document.getElementById("user-input");
-const result = document.getElementById("result");
+const sentenceElement = document.getElementById("sentence");
+const inputBox = document.getElementById("input-box");
+const resultElement = document.getElementById("result");
 
 startButton.addEventListener("click", startGame);
 
+function generateRandomSentence() {
+  const randomWords = [];
+  for (let i = 0; i < sentenceLength; i++) {
+    const randomIndex = Math.floor(Math.random() * words.length);
+    randomWords.push(words[randomIndex]);
+  }
+  return randomWords.join(" ");
+}
+
 function startGame() {
-  currentIndex = 0;
-  userInput.value = "";
-  result.textContent = "";
+  const sentence = generateRandomSentence();
+  sentenceElement.textContent = sentence;
+  inputBox.value = "";
+  inputBox.disabled = false;
+  inputBox.focus();
+  startButton.disabled = true;
 
-  shuffleWords();
-  displaySentence();
+  const startTime = Date.now();
 
-  userInput.removeAttribute("disabled");
-  userInput.focus();
-  userInput.addEventListener("input", checkInput);
+  inputBox.addEventListener("input", function () {
+    const typedText = inputBox.value.trim();
+    if (typedText === sentence) {
+      const endTime = Date.now();
+      const elapsedTime = (endTime - startTime) / 1000; // in seconds
+      const wordsPerMinute = (sentenceLength / elapsedTime) * 60;
 
-  startTime = new Date();
-}
+      resultElement.textContent = `Average Words Per Minute: ${wordsPerMinute.toFixed(
+        2
+      )}`;
 
-function shuffleWords() {
-  for (let i = words.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [words[i], words[j]] = [words[j], words[i]];
-  }
-}
-
-function displaySentence() {
-  const randomWordCount = Math.floor(Math.random() * 10) + 5; // Random word count between 5 and 14
-  const randomSentence = words
-    .slice(currentIndex, currentIndex + randomWordCount)
-    .join(" ");
-  sentenceContainer.textContent = randomSentence;
-}
-
-function checkInput() {
-  const typedText = userInput.value;
-  const currentSentence = sentenceContainer.textContent;
-
-  if (typedText === currentSentence) {
-    userInput.classList.remove("incorrect");
-    userInput.classList.add("correct");
-    currentIndex += currentSentence.split(" ").length;
-
-    if (currentIndex < words.length) {
-      userInput.value = ""; // Clear the text box
-      displaySentence();
-    } else {
-      endGame();
+      inputBox.removeEventListener("input", arguments.callee);
+      inputBox.disabled = true;
+      startButton.disabled = false;
     }
-  } else {
-    userInput.classList.remove("correct");
-    userInput.classList.add("incorrect");
-  }
-}
-
-function endGame() {
-  endTime = new Date();
-  userInput.setAttribute("disabled", true);
-
-  const elapsedTime = (endTime - startTime) / 1000; // in seconds
-  const wordsPerMinute = Math.round((words.length / elapsedTime) * 60);
-
-  result.textContent = `Average Words Per Minute: ${wordsPerMinute}`;
+  });
 }
