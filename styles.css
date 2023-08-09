@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+}
+
+#start-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#word-container {
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+#user-input {
+    font-size: 18px;
+    width: 300px;
+    margin: 10px 0;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
